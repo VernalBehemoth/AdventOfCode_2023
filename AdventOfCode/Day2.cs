@@ -37,19 +37,12 @@ public class Day2Logic : IDayTask
             foreach (var games in diceGames)
             {
                 var results = games.Games.SelectMany(x => x.results).ToList();
-                var red = results.Where(x => x.Key == "red").Select(x => x.Value).Any(x => x > _red);
-                var green = results.Where(x => x.Key == "green").Select(x => x.Value).Any(x => x > _green);
-                var blue = results.Where(x => x.Key == "blue").Select(x => x.Value).Any(x => x > _blue);
+                var red = results.Where(x => x.Key == "red").Select(x => x.Value).Max();
+                var green = results.Where(x => x.Key == "green").Select(x => x.Value).Max();
+                var blue = results.Where(x => x.Key == "blue").Select(x => x.Value).Max();
 
-                if (red || green || blue)
-                {
-                    Console.WriteLine("Failed: " + games.GameId);
-                }
-                else
-                {
-                    result += games.GameIdInt;
-                    Console.WriteLine("Success: " + games.GameIdInt);
-                }
+                result += red * green * blue;
+                Console.WriteLine(games.GameId + ": " + result);
             }
 
 
