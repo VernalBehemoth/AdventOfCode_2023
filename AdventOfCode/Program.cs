@@ -4,26 +4,29 @@ while (keepRunning)
     Console.WriteLine("Select the Day's Task to Run:");
     Console.WriteLine("1. Day 1");
     Console.WriteLine("2. Day 2");
-    // Add more days as you implement them
+    // ... More days
     Console.WriteLine("0. Exit");
 
     var selection = Console.ReadLine();
-
-    switch (selection)
+    IDayTask? task = selection switch
     {
-        case "1":
-            new Day1().RunTask();
-            break;
-        case "2":
-            Console.WriteLine("Soon");
-            break;
-        // Add more cases as needed
-        case "0":
-            keepRunning = false;
-            break;
-        default:
-            Console.WriteLine("Invalid selection, please try again.");
-            break;
+        "1" => new Day1(),
+        "2" => new Day2Logic(),
+        // ... More cases
+        _ => null,
+    };
+
+    if (task != null)
+    {
+        task.RunTask();
+    }
+    else if (selection == "0")
+    {
+        keepRunning = false;
+    }
+    else
+    {
+        Console.WriteLine("Invalid selection, please try again.");
     }
 
     if (keepRunning)

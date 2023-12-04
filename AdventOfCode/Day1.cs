@@ -12,24 +12,23 @@ public class Day1 : IDayTask
         {
             string[] lines = File.ReadAllLines(path);
             var sum = 0;
+            var count = 0;
             foreach (string line in lines)
             {
-                // Extracting numbers from the line
-                var numbers = Regex.Matches(line, @"\d+").Cast<Match>().Select(m => m.Value).ToArray();
+                var numbersFromStrings = NumberExtraction.ExtractNumbers(line);
+                var firstNumberFromStringOrInt = numbersFromStrings[0];
+                var lastNumberFromStringOrInt = numbersFromStrings[numbersFromStrings.Count - 1];
 
-                if (numbers.Length > 0)
-                {
-                    string firstNumber = numbers.First().Substring(0, 1);
-                    string lastNumber = numbers.Last().Substring(numbers.Last().Length - 1);
+                int.TryParse(firstNumberFromStringOrInt.Item2.ToString() + lastNumberFromStringOrInt.Item2.ToString(), out var concatenatedInt);
 
-                    int.TryParse(firstNumber + lastNumber, out var concatenatedInt);
+                sum += concatenatedInt;
 
-                    sum += concatenatedInt;
+                Console.WriteLine(count + ") " + concatenatedInt + " - line: " + line + " - FIRST: " + firstNumberFromStringOrInt.Item3 + " - LAST: " + lastNumberFromStringOrInt.Item3);
 
-                    Console.WriteLine(concatenatedInt);
-                }
+                count++;
             }
-
+            // 54988 - too high
+            // 54995 - too high
             Console.WriteLine("Total: " + sum);
         }
         catch (Exception ex)

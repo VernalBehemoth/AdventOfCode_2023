@@ -1,4 +1,4 @@
-﻿public interface IDayTask
+﻿internal interface IDayTask
 {
     void RunTask();
 }
