@@ -4,6 +4,7 @@ while (keepRunning)
     Console.WriteLine("Select the Day's Task to Run:");
     Console.WriteLine("1. Day 1");
     Console.WriteLine("2. Day 2");
+    Console.WriteLine("3. Day 3");
     // ... More days
     Console.WriteLine("0. Exit");
 
@@ -12,6 +13,7 @@ while (keepRunning)
     {
         "1" => new Day1(),
         "2" => new Day2Logic(),
+        "3" => new Day3Logic(),
         // ... More cases
         _ => null,
     };
